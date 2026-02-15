@@ -1,0 +1,95 @@
+{% extends "base.twig" %}
+{% import "components/sprite.twig" as sprite %}
+
+{% block content %}
+
+    <section class="content-container md:pt-2 lg:pt-8">
+
+    <div class="hidden md:block">
+	{% for date_key, day in days %}
+    {% set date_parts = day.date.full_date | split('-') %}
+			<div class="event-parent-grid">
+            	<h2 class="date-day text-[6rem] event-grid-child leading-none self-center lg:w-1/12 text-lightpurple">
+					{{ date_parts[2] }}
+				</h2>
+				{% for post in day.posts %}
+					<article class="w-full">
+						<div class="relative p-2">
+							
+                            {% if post.post.start_time %}
+					        <span class="block text-lightpurple">{{ post.post.start_time }}</span>
+                            {% endif %}
+
+                            {% if post.location %}
+					        <span class="block text-lightpurple">{{post.location}}</span>
+                            {% endif %}
+
+							<a href="{{ post.post.link }}"class="block underline transition-colors duration-150  hover:text-lightpurple">{{ post.post.title }}</a>
+
+                            {% if (post.post.meta('participants')) %}
+                            {% for participant in get_posts(post.post.meta('participants')) %}
+                                <a href="{{ participant.link }}"class="block transition-colors duration-150  hover:text-lightpurple">{{ participant }}</a>
+                            {% endfor %}
+                            {% endif %}
+
+                            {% if post.post.start_date and post.post.end_date %}							
+                            <div class="inline-block italic">
+                                <span>{{ post.post.start_date }}</span>
+                                <span class="mx-1">-</span>
+                                <span>{{ post.post.end_date }}</span>
+                            </div>
+                            {% endif %}
+						</div>
+					</article>
+				{% endfor %}
+			</div>
+	{% else %}
+	{% endfor %}
+    </div>
+
+    <div class="md:hidden">
+        {% for date_key, day in days %}
+        {% set date_parts = day.date.full_date | split('-') %}
+            <div class="flex w-full flex-col my-8 first:mt-0">
+                <div class="border-b-2 border-lightpurple">
+                    <h2 class="text-lightpurple">{{ date_parts[2] }}</h2>
+                </div>
+                <div class="event-parent-mobile">
+                	{% for post in day.posts %}
+					<article class="w-full flex">
+						<div class="relative py-4">
+							
+                            {% if post.post.start_time %}
+					        <span class="block text-lightpurple">{{ post.post.start_time }}</span>
+                            {% endif %}
+
+                            {% if post.location %}
+					        <span class="block text-lightpurple">{{post.location}}</span>
+                            {% endif %}
+
+							<a href="{{ post.post.link }}"class="block underline transition-colors duration-150  hover:text-lightpurple">{{ post.post.title }}</a>
+
+                            {% if (post.post.meta('participants')) %}
+                            {% for participant in get_posts(post.post.meta('participants')) %}
+                                <a href="{{ participant.link }}"class="block transition-colors duration-150  hover:text-lightpurple">{{ participant }}</a>
+                            {% endfor %}
+                            {% endif %}
+
+                            {% if post.post.start_date and post.post.end_date %}							
+                            <div class="inline-block italic">
+                                <span>{{ post.post.start_date }}</span>
+                                <span class="mx-1">-</span>
+                                <span>{{ post.post.end_date }}</span>
+                            </div>
+                            {% endif %}
+						</div>
+					</article>
+				{% endfor %}
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</section>
+
+{% endblock %}

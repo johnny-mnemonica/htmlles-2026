@@ -1,0 +1,12 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<div class="text-center content-container lg:px-16">
+		{% for post in posts|reverse %}
+		<a href="{{ post.link}}">
+			<h3 class="text-lg leading-6 md:text-4xl block lg:inline-block *:transition-colors duration-150 ease-in-out whitespace-no-wrap px-1 focus-visible:text-black focus:outline-none rounded-md">{{ post.title }}</h3>
+		</a>
+		{% endfor %}
+	</div>
+
+{% endblock %}

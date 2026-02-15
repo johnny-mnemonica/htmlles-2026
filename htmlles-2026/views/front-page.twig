@@ -1,0 +1,30 @@
+{% extends "base.twig" %}
+
+{% import "components/sprite.twig" as sprite %}
+
+	{% block content %}
+		<section class="front-page-wrapper relative pt-4" role="main">
+			<div class="parent-grid">
+				<div class="grid-child-1 md:flex" >
+					<h1 class="text-white xl:text-9xl lg:text-8xl md:text-7xl text-5xl inline-block self-center select-none z-30 relative align-top">{{ post.meta('text-1') }}</h1>
+					<div class="inline-block relative lg:w-80 w-64 h-64 cursor-pointer" x-init="new Parallax($el)" data-pointer-events="true">
+						{{ sprite.basic('bird-outline', 'illustration outline-landing', 'data-depth="0.2"') }}
+						{{ sprite.basic('bird', 'illustration silhouette-landing', 'data-depth="0.6"') }}
+					</div>
+				</div>
+				<div class="grid-child-2 lg:flex justify-center hidden">
+					{{ sprite.accessible('dates', 'w-[26rem] z-30', 'May/Mai 1 - 15 2024', 'dates') }}
+				</div>
+				<div class="grid-child-3">
+					<h1 style="line-height: 0.5" class="text-white xl:text-9xl lg:text-8xl md:text-7xl text-5xl select-none z-30 relative">{{ post.meta('text-2') }}</h1>
+				</div>
+			</div>
+			<div class="sm:w-[35rem] sm:h-[35rem] h-80 w-80 inline-block absolute top-[24%] left-[-2%] force-rotate cursor-pointer" x-init="new Parallax($el)" data-pointer-events="true">
+				{{ sprite.basic('olive-branch-outline', 'illustration outline-landing', 'data-depth="0.2"') }}
+				{{ sprite.basic('olive-branch', 'illustration silhouette-landing', 'data-depth="0.4"') }}
+			</div>
+			{{ sprite.accessible('dates', 'absolute smd:right-16 smd:top-[23.5rem] smd:w-[26rem] right-12 w-64 top-[18rem] h-12 rotate-90 origin-bottom-right lg:hidden inline-block', 'May/Mai 1 - 15 2024', 'dates') }}
+		</div>
+	{% endblock %}
+
+		

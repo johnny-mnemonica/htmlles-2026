@@ -1,0 +1,13 @@
+{% macro basic(name, class, attributes, fill) %}
+    <svg class="{{ class }}" aria-hidden="true" {{ fill }} focusable="false" {{attributes}} preserveAspectRatio="xMinYMin slice">
+        <use href="#{{ name }}" />
+    </svg>
+{% endmacro %}
+
+{% macro accessible(name, class, label, label_id, attributes) %}
+    {% set label_id = fn('uniqid', label_id ~ '_' ) %}
+    <svg role="img" class="{{ class }}" aria-labelledby="{{ label_id }}" {{attributes}}>
+        <title id="{{ label_id }}">{{ label }}</title>
+        <use href="#{{ name }}" />
+    </svg>
+{% endmacro %}

@@ -1,0 +1,19 @@
+{% extends "base.twig" %}
+{% import "components/sprite.twig" as sprite %}
+
+{% block content %}
+	<div class="content-container flex md:pr-16 lg:pr-20">
+        <div class="pr-[4.5rem] md:flex flex-col hidden lg:justify-center">
+			{{sprite.basic('olive-branch', 'w-56 h-56 lg:w-[16rem] lg:h-[22rem]', 'fill="#573e91"')}}
+            {{sprite.basic('fish', 'w-56 h-56 lg:w-[16rem] lg:h-[22rem] rotate-[325deg]', 'fill="#573e91"')}}
+        </div>
+		<article class="post-type-{{post.post_type}}" id="post-{{post.ID}}">
+			<section class="article-content">
+				<div class="article-body">
+					{{post.content}}
+				</div>
+			</section>
+		{{ sprite.basic('cow', 'md:hidden w-[15rem] h-40 mt-8', 'fill=#573e91') }}
+		</article>
+	</div><!-- /content-wrapper -->
+{% endblock %}

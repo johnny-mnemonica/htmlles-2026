@@ -1,0 +1,45 @@
+{% import "components/sprite.twig" as sprite %}
+
+{% block html_head_container %}
+
+{% include 'html-header.twig' %}
+	{% block head %}
+	{% endblock %}
+	</head>
+{% endblock %}
+
+	<body class="{{body_class}}" data-template="base.twig" {% if is_front_page %}style="background-image:url({{ theme.link }}/static/img/background_purple_lines.png)"{% else %} style="background-color: #e5e5e5" {% endif %}>
+		<main class="relative {% if is_front_page %}max-h-screen overflow-hidden {% endif %}">
+		{% include "/static/img/sprite.svg" ignore missing %}
+		{{ function('wp_body_open') }}
+		<a class="skip-link screen-reader-text" href="#content">{{ _e( 'Skip to content') }}</a>
+
+		{% include "partial/header.twig" %}
+
+		{% if is_front_page == false %}
+		{% include "partial/marquee.twig" %}
+		{% endif %}
+
+		<section id="content" role="main">
+		{% block content %}
+			<div class="content-container">
+			{% if title %}<h1>{{title}}</h1>{% endif %}
+			<div class="wrapper">
+					Sorry, no content
+			</div>
+			{% if sidebar %}
+				<aside class="layout-sidebar">
+					{{sidebar}}
+				</aside>
+			{% endif %}
+		</div>
+		{% endblock %}
+		</section>
+
+		<footer id="footer">
+		{% include 'footer.twig' %}
+		</footer>
+		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.8/dist/cdn.min.js"></script>
+		{{ function('wp_footer') }}
+	</body>
+</html>

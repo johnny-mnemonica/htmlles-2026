@@ -1,0 +1,47 @@
+{% import "components/sprite.twig" as sprite %}
+
+{% if is_front_page %}
+{% set fill = 'fill = #fff' %}
+{% else %}
+{% set fill = 'fill = #573e91' %}
+{% endif %}
+
+<header class="relative z-10 py-4 {% if is_front_page == false %} bg-lightpurple md:bg-transparent {% else %} {% endif %} md:pt-6 lg:pt-10"
+x-data="{ show : false, matches: window.matchMedia('(min-width: 768px)').matches }"  @resize.window="matches = window.matchMedia('(min-width: 768px)').matches">
+
+    <div class="{% if is_front_page %}front-page-wrapper{% else %}wrapper{% endif %}">
+
+		<div class="flex flex-wrap items-center md:items-start smd:gap-x-3 justify-between">
+
+			<a href="{{ site.link }}" class="transition-opacity duration-150 ease-in-out hover:opacity-50 mr-8">
+				{{ sprite.accessible('logo-full', 'w-32 h-12 xl:w-56 xl:h-24 hidden md:block', site.title, 'logo', fill )}}
+				{{ sprite.accessible('logo-small', 'w-40 h-10 md:hidden', site.title, 'logo', 'fill=#fff') }}
+			</a>
+			
+			{% if menu %}
+			<button @click="show = !show" class="ml-auto md:hidden" :aria-label="show ? '{{ __('Fermer le menu', 'htmlles') }}' : '{{ __('Ouvrir le menu', 'htmlles') }}'" :aria-expanded="show.toString()" aria-controls="navigation" x-transition.opacity>
+				{{ sprite.basic('menu', 'w-6 h-6', 'x-show="!show" x-transition', 'fill=#fff') }}
+				{{ sprite.basic('close', 'w-6 h-6 mr-4','x-show="show" x-cloak x-transition', 'fill=#fff' )}}
+			</button>
+
+				<nav id="navigation" class="flex flex-col justify-around flex-grow md:flex-row md:self-center" x-show="show || matches" x-transition.opacity x-cloak>
+					{% for item in menu.items %}
+
+						<a class="px-2 py-1 font-sans text-lg font-medium transition-colors duration-150 ease-in-out border-b border-transparent focus:outline-none focus-visible:lightpurple {% if is_front_page %} text-white hover:border-white {% else %} text-white md:text-darkpurple hover:border-white md:hover:border-darkpurple {% endif %}" href="{{ item.link }}" {{ item.current ? 'aria-current="page"'}}>
+							{{ item.title }}
+						</a>
+
+					{% endfor %}
+				</nav>
+			{% endif %}
+
+			{% if is_front_page %}
+			<a href="https://www.ada-x.org/" target="_blank"
+			class="transition-opacity duration-150 ease-in-out hover:opacity-50">
+				{{ sprite.accessible('ada-x', 'ml-8 w-16 h-12 xl:w-36 xl:h-24 hidden lg:block', 'Ada X', 'ada-x') }}
+			</a>
+			{% endif %}
+		</div>
+
+    </div>
+</header>

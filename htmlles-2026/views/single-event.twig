@@ -1,0 +1,97 @@
+{% extends "base.twig" %}
+{% import "components/sprite.twig" as sprite %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+	<section class="content-container flex flex-wrap ">
+
+		<div class="flex flex-col md:inline-block w-full md:w-1/2">
+			<h1 class="h1">{{ post.title }}</h1>
+			<div class="mt-2 flex">
+				<div>		
+				{% if post.participants %}
+					<div class="mt-4 text-xl">
+						<ul>
+							{% for participant in get_posts(post.meta('participants')) %}
+								<li>
+									<a href="{{participant.link}}">{{ participant.title }}</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>			
+				{% endif %}
+
+				{% if post.meta('event_type') %}
+				<div class="mt-4 text-xl">{{ post.meta('event_type') }}</div>
+				{% endif %}
+
+				{% if post.start_time or post.end_time %}
+				<div class="mt-4 mb-2 font-serif text-xl">
+					{% if post.start_time %}
+					<span>{{ post.start_time }}</span>
+					{% endif %}
+					{% if post.end_time %}
+					<span class="font-sans mx-1"> - </span>
+					<span>{{ post.end_time}}</span>
+					{% endif %}
+				</div>
+				{% endif %}
+
+				<div class="inline-block mt-4 font-serif text-xl italic">
+					{% if post.start_date %}
+					{{ sprite.basic('date', 'mr-1 w-8 h-8 inline-block') }}								
+					<span>{{ post.start_date }}</span>
+					{% endif %}
+					{% if post.end_date %}
+					<span class="font-sans not-italic font-semibold mx-1">{{ __('au', 'htmlles') }}</span>
+					<span>{{ post.end_date }}</span>
+					{% endif %}
+				</div>
+				
+				{% if post.location %}
+					<div class="flex mt-4 items-center font-serif text-xl">
+						{{ sprite.basic('pin', 'w-6 h-6 md:mr-2 mr-4' ) }}								
+						{{ post.location }}
+					</div>
+				{% endif %}
+				</div>
+			</div>
+
+			{% if post.thumbnail %}
+				<img class="w-full mt-8 md:hidden" src="{{ post.thumbnail.src }}" alt="{{ post.thumbnail.alt }}" width="{{ post.thumbnail.width }}" height="{{ post.thumbnail.height }}">
+			{% endif %}
+
+			<div class="mt-8">
+				{{post.content}}
+			</div>
+
+		</div>
+
+		<div class="w-full md:pr-5 md:pl-10 md:w-1/2">
+			{% if post.thumbnail %}
+					<img class="w-full mb-4 hidden md:inline-block" src="{{ post.thumbnail.src }}" alt="{{ post.thumbnail.alt }}" width="{{ post.thumbnail.width }}" height="{{ post.thumbnail.height }}">
+			{% endif %}
+			{% if post.meta('gallery') %}
+				{% for image in post.meta('gallery')  %}
+					<img class="w-full mb-4 mt-4 md:mt-0" src="{{ image.url }}" alt="{{image.alt }}" width="{{ image.width }}" height="{{ image.height }}">
+				{% endfor %}
+			{% endif %}
+		</div>
+	</section>
+{# 
+	{% if post.audio_file %}
+		{{ include('components/audio.twig', { post: post } ) }}		
+	{% endif %}	 #}
+	
+{% endblock %}
+
+{# 
+{% block head %}
+	<style>
+		body {
+			margin-bottom: 100px;
+		}
+	</style>
+{% endblock %} #}

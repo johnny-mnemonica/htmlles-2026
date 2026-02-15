@@ -1,0 +1,35 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<section class="content-container">
+		<h1 class="h1">{{ post.title }}</h1>
+		<div class="flex flex-col md:flex-row py-4 {% if post.thumbnail == false %} gap-x-20 {% else %} gap-x-10 {% endif %} justify-between">
+			{% if post.thumbnail %}
+					<img class="md:hidden mb-6" src="{{ post.thumbnail.src }}" alt="{{ post.thumbnail.alt }}" width="{{ post.thumbnail.width }}" height="{{ post.thumbnail.height }}">
+			{% endif %}
+			<div class="w-full md:w-1/2 xl:w-2/3">
+					{{post.content}}
+			</div>
+
+			{% if (post.thumbnail or post.events) %}
+				<div class="w-full md:w-1/2 xl:w-1/3">
+				{% if post.thumbnail %}
+					<img class="hidden md:inline-block" src="{{ post.thumbnail.src }}" alt="{{ post.thumbnail.alt }}" width="{{ post.thumbnail.width }}" height="{{ post.thumbnail.height }}">
+				{% endif %}
+					{% if post.events %}
+					<h2 class="text-left h2 mt-[1em] md:mt-0">{{ __('Événements', 'htmlles') }}</h2>
+						<div class="mt-4 text-xl"
+							<ul>
+								{% for event in get_posts(post.events) %}
+									<li>
+										<a href="{{event.link}}" class="*:transition-colors duration-150 ease-in-out">{{ event.title }}</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</div>
+					{% endif %}
+				</div>
+			{% endif %}
+		</div>
+	</section>
+{% endblock %}
