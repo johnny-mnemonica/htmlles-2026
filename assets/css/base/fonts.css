@@ -1,0 +1,24 @@
+@font-face {
+    font-family: "Abordage";
+    src: url("../fonts/Abordage-Regular.ttf") format("truetype"),
+        url("../fonts/Abordage-Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Paragon";
+    src: url("../fonts/Paragon-Regular_kerned.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "ParagonItalic";
+    src: url("../fonts/Paragonitalic-Regular_kerned.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

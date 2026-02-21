@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Typography is here */
+
+@layer base {
+    h1, h2, h3 {
+      @apply text-4xl lg:text-4xl uppercase text-darkpurple;
+    }
+}

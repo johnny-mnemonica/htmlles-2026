@@ -1,0 +1,42 @@
+/* utilities/animation.css
+ * ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
+ * Animation
+ * ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
+ */
+
+@-webkit-keyframes marquee {
+0%   {
+    transform: translateX(-100%);
+}
+
+100% {
+    transform: translateX(0%);
+}
+}
+
+@keyframes marquee {
+0%   {
+    transform: translateX(-100%);
+}
+
+100% {
+    transform: translateX(0%);
+}
+}
+
+.animate-marquee {
+-webkit-animation: marquee 10s linear infinite;
+        animation: marquee 10s linear infinite;
+}
+
+.group:hover > .animate-marquee {
+-webkit-animation-play-state: paused;
+        animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion) {
+.animate-marquee {
+    -webkit-animation: none;
+            animation: none;
+}
+}
